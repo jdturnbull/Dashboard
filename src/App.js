@@ -1,50 +1,60 @@
-import React, { Component } from "react"
-import logo from "./logo.svg"
-import "./App.css"
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import AuthedLayout from './layouts/AuthedLayout';
+import UnauthedLayout from './layouts/UnauthedLayout';
+import { setup } from './stores/user';
+import SignIn from './screens/SignIn';
+import SignUp from './screens/SignUp';
+import Pending from './screens/Pending';
+import Dashboard from './screens/Dashboard';
+import WorkersOutlet from './screens/Workers/Outlet';
+import ShopifyOutlet from './screens/Workers/Shopify/Outlet';
+import ShopifyCreate from './screens/Workers/Shopify/Create';
+import ShopifyCreateSuccess from './screens/Workers/Shopify/Success';
+import ShopifyView from './screens/Workers/Shopify/View';
+import ShopifyEdit from './screens/Workers/Shopify/Edit';
 
-class LambdaDemo extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { loading: false, msg: null }
-  }
+const UnauthedApp = () => {
+  return (
+    <UnauthedLayout>
+      <Routes>
+        <Route path="/" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/pending" element={<Pending />} />
+      </Routes>
+    </UnauthedLayout>
+  );
+};
 
-  handleClick = api => e => {
-    e.preventDefault()
+const AuthedApp = () => {
+  return (
+    <AuthedLayout>
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/signup" element={<Navigate to="/" replace />} />
+        <Route path="/workers" element={<WorkersOutlet />}>
+          <Route path="shopify" element={<ShopifyOutlet />}>
+            <Route path="create" element={<ShopifyCreate />} />
+            <Route path="success" element={<ShopifyCreateSuccess />} />
+            <Route path="view:id" element={<ShopifyView />} />
+            <Route path="edit:id" element={<ShopifyEdit />} />
+          </Route>
+        </Route>
+      </Routes>
+    </AuthedLayout>
+  );
+};
 
-    this.setState({ loading: true })
-    fetch("/.netlify/functions/" + api)
-      .then(response => response.json())
-      .then(json => this.setState({ loading: false, msg: json.msg }))
-  }
+const App = () => {
+  const dispatch = useDispatch();
+  const session = useSelector((state) => state.user.session);
 
-  render() {
-    const { loading, msg } = this.state
+  useEffect(() => {
+    dispatch(setup());
+  }, []);
 
-    return (
-      <p>
-        <button onClick={this.handleClick("hello")}>{loading ? "Loading..." : "Call Lambda"}</button>
-        <button onClick={this.handleClick("async-dadjoke")}>{loading ? "Loading..." : "Call Async Lambda"}</button>
-        <br />
-        <span>{msg}</span>
-      </p>
-    )
-  }
-}
+  return <BrowserRouter>{session ? <AuthedApp /> : <UnauthedApp />}</BrowserRouter>;
+};
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <LambdaDemo />
-        </header>
-      </div>
-    )
-  }
-}
-
-export default App
+export default App;
