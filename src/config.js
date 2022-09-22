@@ -15,5 +15,5 @@ module.exports = {
   shopify: {
     uuid: process.env.REACT_APP_SHOPIFY_UUID,
   },
-  api_base: 'http://localhost:7074',
+  api_base: "https://apiv2.communion.so",
 };
