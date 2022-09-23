@@ -15,5 +15,12 @@ module.exports = {
   shopify: {
     uuid: process.env.REACT_APP_SHOPIFY_UUID,
   },
-  api_base: "https://apiv2.communion.so",
+  app_base:
+    process.env.NODE_ENV === "production"
+      ? "https://sprightly-pithivier-b6b45f.netlify.app"
+      : "http://localhost:3000",
+  api_base:
+    process.env.NODE_ENV === "production"
+      ? "https://apiv2.communion.so"
+      : "http://localhost:7074",
 };

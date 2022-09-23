@@ -11,6 +11,7 @@ import {
 import { useSearchParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setup } from "../../stores/user";
+import { app_base } from "../../config";
 
 const Pending = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -24,7 +25,7 @@ const Pending = () => {
   if (token) {
     window.localStorage.setItem("token", token);
     dispatch(setup());
-    window.open("https://sprightly-pithivier-b6b45f.netlify.app", "_self");
+    window.open(app_base, "_self");
   }
 
   return (

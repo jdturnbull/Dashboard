@@ -1,7 +1,7 @@
-import React from 'react';
-import { Card, Box, CardHeader, Grid } from '@mui/material';
-import { useSelector } from 'react-redux';
-import WorkerList from '../../components/WorkerList';
+import React from "react";
+import { Card, Box, CardHeader, Grid } from "@mui/material";
+import { useSelector } from "react-redux";
+import WorkerList from "../../components/WorkerList";
 
 const Dashboard = () => {
   const workers = useSelector((state) => state.user.workers);
@@ -11,8 +11,12 @@ const Dashboard = () => {
       <Card>
         <CardHeader title="Active Agents" />
       </Card>
-      <Grid container spacing={3} sx={{ display: 'flex', alignItems: 'center' }}>
-        <WorkerList workers={workers} screen={'dashboard'} />
+      <Grid
+        container
+        spacing={3}
+        sx={{ display: "flex", alignItems: "center" }}
+      >
+        <WorkerList workers={workers} screen={"dashboard"} />
       </Grid>
     </Box>
   );

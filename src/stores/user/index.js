@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import call from "../../utils/call";
+import { app_base } from "../../config";
 
 // Gets token from localstorage, verifies and returns session
 export const setup = createAsyncThunk("user/setup", async () => {
@@ -35,9 +36,7 @@ export const user = createSlice({
     builder.addCase(auth.fulfilled, (state, action) => {
       const { email, firstName } = action.payload;
 
-      const redirect = new URL(
-        "https://sprightly-pithivier-b6b45f.netlify.app/pending"
-      );
+      const redirect = new URL(`${app_base}/pending`);
       redirect.searchParams.append("email", email);
       redirect.searchParams.append("firstName", firstName);
 
