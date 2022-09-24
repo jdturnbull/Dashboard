@@ -1,19 +1,19 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import AuthedLayout from './layouts/AuthedLayout';
-import UnauthedLayout from './layouts/UnauthedLayout';
-import { setup } from './stores/user';
-import SignIn from './screens/SignIn';
-import SignUp from './screens/SignUp';
-import Pending from './screens/Pending';
-import Dashboard from './screens/Dashboard';
-import WorkersOutlet from './screens/Workers/Outlet';
-import ShopifyOutlet from './screens/Workers/Shopify/Outlet';
-import ShopifyCreate from './screens/Workers/Shopify/Create';
-import ShopifyCreateSuccess from './screens/Workers/Shopify/Success';
-import ShopifyView from './screens/Workers/Shopify/View';
-import ShopifyEdit from './screens/Workers/Shopify/Edit';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import AuthedLayout from "./layouts/AuthedLayout";
+import UnauthedLayout from "./layouts/UnauthedLayout";
+import { setup } from "./stores/user";
+import SignIn from "./screens/SignIn";
+import SignUp from "./screens/SignUp";
+import Pending from "./screens/Pending";
+import Dashboard from "./screens/Dashboard";
+import WorkersOutlet from "./screens/Workers/Outlet";
+import ShopifyOutlet from "./screens/Workers/Shopify/Outlet";
+import ShopifyCreate from "./screens/Workers/Shopify/Create";
+import ShopifyCreateSuccess from "./screens/Workers/Shopify/Success";
+import ShopifyView from "./screens/Workers/Shopify/View";
+import ShopifyEdit from "./screens/Workers/Shopify/Edit";
 
 const UnauthedApp = () => {
   return (
@@ -50,11 +50,17 @@ const App = () => {
   const dispatch = useDispatch();
   const session = useSelector((state) => state.user.session);
 
+  console.log({ session });
+
+  console.log(session ? "Authed" : "Unauthed");
+
   useEffect(() => {
     dispatch(setup());
   }, []);
 
-  return <BrowserRouter>{session ? <AuthedApp /> : <UnauthedApp />}</BrowserRouter>;
+  return (
+    <BrowserRouter>{session ? <AuthedApp /> : <UnauthedApp />}</BrowserRouter>
+  );
 };
 
 export default App;
