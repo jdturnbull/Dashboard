@@ -81,13 +81,13 @@ const View = () => {
           }
         />
       </Card>
-      <Alert severity="warning" sx={{ display: "flex", alignItems: "center" }}>
+      {/* <Alert severity="warning" sx={{ display: "flex", alignItems: "center" }}>
         You haven't activated the agent yet - when you've finished configuration
         please
         <Button sx={{ marginBottom: "3px" }} onClick={handleDeepLinkPress}>
           Activate
         </Button>
-      </Alert>
+      </Alert> */}
       <TabPanel value={tabValue} index={0}>
         <Analytics
           conversations={conversations}
