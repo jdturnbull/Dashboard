@@ -23,7 +23,7 @@ const items = [
   {
     href: "/workers",
     icon: <EngineeringIcon fontSize="small" />,
-    title: "Workers",
+    title: "Agents",
   },
   {
     href: "/account",

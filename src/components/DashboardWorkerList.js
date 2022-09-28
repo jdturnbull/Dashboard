@@ -9,6 +9,10 @@ const DashboardWorkerList = (props) => {
 
   const navigate = useNavigate();
 
+  const handleClick = () => {
+    navigate("workers/create");
+  };
+
   const WorkerList = ({ workers }) => {
     const handleWorkerClick = (id) => {
       navigate(`workers/view${id}`);
@@ -39,7 +43,7 @@ const DashboardWorkerList = (props) => {
       }}
     >
       {workers.length === 0 ? (
-        <EmptyWorkersList />
+        <EmptyWorkersList handleClick={handleClick} />
       ) : (
         <WorkerList workers={workers} />
       )}
