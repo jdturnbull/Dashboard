@@ -58,10 +58,6 @@ const App = () => {
   const dispatch = useDispatch();
   const session = useSelector((state) => state.user.session);
 
-  console.log({ session });
-
-  console.log(session ? "Authed" : "Unauthed");
-
   useEffect(() => {
     dispatch(setup());
   }, []);
