@@ -17,7 +17,7 @@ const WorkerCreate = () => {
   return (
     <Box component="main" sx={{ width: "100%", height: "93vh" }}>
       <NavBar header={"Select an Agent"} />
-      <Grid sx={{ mt: 2, padding: "0 15px" }} container spacing={3}>
+      <Grid sx={{ mt: 2, padding: "0 15px" }} container spacing={2}>
         <Grid item lg={4} md={12} xl={12} xs={12}>
           <AgentCard
             label={"Shopify"}

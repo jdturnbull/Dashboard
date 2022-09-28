@@ -9,6 +9,7 @@ import SignUp from "./screens/SignUp";
 import Pending from "./screens/Pending";
 import Dashboard from "./screens/Dashboard";
 import WorkersCreate from "./screens/Workers/Create";
+import WorkersViewAll from "./screens/Workers/ViewAll";
 import WorkersOutlet from "./screens/Workers/Outlet";
 import WorkersView from "./screens/Workers/View";
 import ShopifyOutlet from "./screens/Workers/Shopify/Outlet";
@@ -16,6 +17,7 @@ import ShopifyCreate from "./screens/Workers/Shopify/Create";
 import ShopifyCreateSuccess from "./screens/Workers/Shopify/Success";
 import ShopifyView from "./screens/Workers/Shopify/View";
 import ShopifyEdit from "./screens/Workers/Shopify/Edit";
+import Account from "./screens/Account";
 
 const UnauthedApp = () => {
   return (
@@ -35,7 +37,9 @@ const AuthedApp = () => {
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/signup" element={<Navigate to="/" replace />} />
+        <Route path="/account" element={<Account />} />
         <Route path="/workers" element={<WorkersOutlet />}>
+          <Route path="" element={<WorkersViewAll />} />
           <Route path="view:id" element={<WorkersView />} />
           <Route path="create" element={<WorkersCreate />} />
           <Route path="shopify" element={<ShopifyOutlet />}>

@@ -119,7 +119,6 @@ const View = () => {
   return (
     <Box component="main">
       <NavBar header={"Your Shopify Chatbot"} Right={Tabs} />
-
       {!worker.addedToTheme && (
         <Alert
           severity="warning"
@@ -133,38 +132,40 @@ const View = () => {
         </Alert>
       )}
 
-      <TabPanel value={tabValue} index={0}>
-        <Analytics
-          conversations={conversations}
-          refresh={refresh}
-          worker={worker}
-          actions={actions}
-        />
-      </TabPanel>
-      <TabPanel value={tabValue} index={1}>
-        <Actions
-          conversations={conversations}
-          refresh={refresh}
-          worker={worker}
-          actions={actions}
-        />
-      </TabPanel>
-      <TabPanel value={tabValue} index={2}>
-        <Conversations
-          conversations={conversations}
-          refresh={refresh}
-          worker={worker}
-          actions={actions}
-        />
-      </TabPanel>
-      <TabPanel value={tabValue} index={3}>
-        <Configuration
-          conversations={conversations}
-          refresh={refresh}
-          worker={worker}
-          actions={actions}
-        />
-      </TabPanel>
+      <Box sx={{ mt: 2 }}>
+        <TabPanel value={tabValue} index={0}>
+          <Analytics
+            conversations={conversations}
+            refresh={refresh}
+            worker={worker}
+            actions={actions}
+          />
+        </TabPanel>
+        <TabPanel value={tabValue} index={1}>
+          <Actions
+            conversations={conversations}
+            refresh={refresh}
+            worker={worker}
+            actions={actions}
+          />
+        </TabPanel>
+        <TabPanel value={tabValue} index={2}>
+          <Conversations
+            conversations={conversations}
+            refresh={refresh}
+            worker={worker}
+            actions={actions}
+          />
+        </TabPanel>
+        <TabPanel value={tabValue} index={3}>
+          <Configuration
+            conversations={conversations}
+            refresh={refresh}
+            worker={worker}
+            actions={actions}
+          />
+        </TabPanel>
+      </Box>
     </Box>
   );
 };

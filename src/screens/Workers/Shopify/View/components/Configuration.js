@@ -224,7 +224,7 @@ const Configuration = ({ worker, refresh }) => {
   return (
     <PerfectScrollbar>
       <Box>
-        <Grid container spacing={3} sx={{ marginBottom: "20px" }}>
+        <Grid container spacing={2} sx={{ marginBottom: "20px" }}>
           <Grid item>
             <Button variant="contained" onClick={handleSubmit}>
               Save

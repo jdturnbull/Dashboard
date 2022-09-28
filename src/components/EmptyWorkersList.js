@@ -8,7 +8,7 @@ const EmptyWorkersList = ({ handleClick }) => {
     <Grid
       container
       direction={"column"}
-      spacing={3}
+      spacing={2}
       sx={{
         width: "80vw",
         alignItems: "center",

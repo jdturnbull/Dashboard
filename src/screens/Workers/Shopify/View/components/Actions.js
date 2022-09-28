@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   Box,
   CardHeader,
@@ -15,49 +15,72 @@ import {
   TableBody,
   Grid,
   Button,
-} from '@mui/material';
-import Backdrop from '@mui/material/Backdrop';
-import PerfectScrollbar from 'react-perfect-scrollbar';
-import moment from 'moment';
-import { useDispatch } from 'react-redux';
-import { resolve } from '../../../../../stores/shopify';
+} from "@mui/material";
+import Backdrop from "@mui/material/Backdrop";
+import PerfectScrollbar from "react-perfect-scrollbar";
+import moment from "moment";
+import { useDispatch } from "react-redux";
+import { resolve } from "../../../../../stores/shopify";
 
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '55%',
-  transform: 'translate(-50%, -50%)',
-  width: '60%',
-  bgcolor: 'background.paper',
+  position: "absolute",
+  top: "50%",
+  left: "55%",
+  transform: "translate(-50%, -50%)",
+  width: "60%",
+  bgcolor: "background.paper",
   boxShadow: 24,
 };
 
 const Chatlog = ({ log }) => {
   return (
     <PerfectScrollbar>
-      <Box sx={{ height: '300px', overflowY: 'scroll' }}>
+      <Box sx={{ height: "300px", overflowY: "scroll" }}>
         {log.map((c, i) => {
           if (c.AI) {
             return (
-              <Box key={i} sx={{ display: 'flex', flex: 1, justifyContent: 'flex-start', marginBottom: '20px' }}>
+              <Box
+                key={i}
+                sx={{
+                  display: "flex",
+                  flex: 1,
+                  justifyContent: "flex-start",
+                  marginBottom: "20px",
+                }}
+              >
                 <Box
                   key={i}
                   sx={{
-                    backgroundColor: 'primary.main',
-                    padding: '5px 15px',
-                    borderRadius: '10px',
-                    maxWidth: '70%',
-                  }}>
-                  <Typography sx={{ color: '#fff' }}>{c.AI}</Typography>
+                    backgroundColor: "primary.main",
+                    padding: "5px 15px",
+                    borderRadius: "10px",
+                    maxWidth: "70%",
+                  }}
+                >
+                  <Typography sx={{ color: "#fff" }}>{c.AI}</Typography>
                 </Box>
               </Box>
             );
           } else {
             return (
-              <Box key={i} sx={{ display: 'flex', flex: 1, justifyContent: 'flex-end', marginBottom: '20px' }}>
+              <Box
+                key={i}
+                sx={{
+                  display: "flex",
+                  flex: 1,
+                  justifyContent: "flex-end",
+                  marginBottom: "20px",
+                }}
+              >
                 <Box
                   key={i}
-                  sx={{ backgroundColor: '#00000010', padding: '5px 15px', borderRadius: '10px', maxWidth: '70%' }}>
+                  sx={{
+                    backgroundColor: "#00000010",
+                    padding: "5px 15px",
+                    borderRadius: "10px",
+                    maxWidth: "70%",
+                  }}
+                >
                   <Typography>{c.Customer}</Typography>
                 </Box>
               </Box>
@@ -69,7 +92,13 @@ const Chatlog = ({ log }) => {
   );
 };
 
-const ModalComponent = ({ open, handleClose, action, resolve, conversation }) => {
+const ModalComponent = ({
+  open,
+  handleClose,
+  action,
+  resolve,
+  conversation,
+}) => {
   const handleResolve = () => resolve(action.id);
 
   if (action) {
@@ -83,7 +112,8 @@ const ModalComponent = ({ open, handleClose, action, resolve, conversation }) =>
         BackdropComponent={Backdrop}
         BackdropProps={{
           timeout: 500,
-        }}>
+        }}
+      >
         <Fade in={open}>
           <Card sx={style}>
             <CardHeader
@@ -96,10 +126,12 @@ const ModalComponent = ({ open, handleClose, action, resolve, conversation }) =>
             />
             <Divider />
             <CardContent>
-              <Grid container spacing={3}>
+              <Grid container spacing={2}>
                 {action.orderNumber && (
                   <Grid item lg={4} md={12} xl={12} xs={12}>
-                    <Typography sx={{ fontWeight: 500 }}>Order Number</Typography>
+                    <Typography sx={{ fontWeight: 500 }}>
+                      Order Number
+                    </Typography>
                     <Typography>{action.orderNumber}</Typography>
                   </Grid>
                 )}
@@ -115,10 +147,12 @@ const ModalComponent = ({ open, handleClose, action, resolve, conversation }) =>
                 </Grid>
                 <Grid item lg={12} md={12} xl={12} xs={12}>
                   <Typography sx={{ fontWeight: 500 }}>Summary</Typography>
-                  <Typography sx={{ marginBottom: '30px' }}>{conversation.summary}</Typography>
+                  <Typography sx={{ marginBottom: "30px" }}>
+                    {conversation.summary}
+                  </Typography>
                   <Divider />
                 </Grid>
-                <Grid item sx={{ mt: '10px' }} lg={12} md={12} xl={12} xs={12}>
+                <Grid item sx={{ mt: "10px" }} lg={12} md={12} xl={12} xs={12}>
                   <Chatlog log={conversation.chatlog} />
                 </Grid>
               </Grid>
@@ -148,8 +182,12 @@ const ActionRow = ({ action, onClick }) => {
 const Actions = ({ conversations, actions, worker, refresh }) => {
   const [action, setAction] = useState();
   const [conversation, setConversation] = useState();
-  const merchantActions = actions.filter((a) => a.merchantRequired && !a.archived);
-  const agentActions = actions.filter((a) => !a.merchantRequired && !a.archived);
+  const merchantActions = actions.filter(
+    (a) => a.merchantRequired && !a.archived
+  );
+  const agentActions = actions.filter(
+    (a) => !a.merchantRequired && !a.archived
+  );
 
   const dispatch = useDispatch();
 
@@ -189,13 +227,15 @@ const Actions = ({ conversations, actions, worker, refresh }) => {
             </TableHead>
             <TableBody>
               {merchantActions.map((a) => {
-                return <ActionRow key={a.id} action={a} onClick={handleClick} />;
+                return (
+                  <ActionRow key={a.id} action={a} onClick={handleClick} />
+                );
               })}
             </TableBody>
           </Table>
         </CardContent>
       </Card>
-      <Card sx={{ marginTop: '20px' }}>
+      <Card sx={{ marginTop: "20px" }}>
         <CardHeader title="Actions Taken by Agent" />
         <Divider />
         <CardContent>
@@ -210,7 +250,9 @@ const Actions = ({ conversations, actions, worker, refresh }) => {
             </TableHead>
             <TableBody>
               {agentActions.map((a) => {
-                return <ActionRow key={a.id} action={a} onClick={handleClick} />;
+                return (
+                  <ActionRow key={a.id} action={a} onClick={handleClick} />
+                );
               })}
             </TableBody>
           </Table>

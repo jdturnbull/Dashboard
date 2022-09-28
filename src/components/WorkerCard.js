@@ -39,7 +39,7 @@ const WorkerCard = (props) => {
   return (
     <Card className={props.classes.card} onClick={handleClick}>
       <CardContent>
-        <Grid container spacing={3} sx={{ justifyContent: "space-between" }}>
+        <Grid container spacing={2} sx={{ justifyContent: "space-between" }}>
           <Grid item>
             <Typography color="textSecondary" gutterBottom variant="overline">
               Agent

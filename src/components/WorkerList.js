@@ -29,7 +29,7 @@ const WorkerList = (props) => {
       {workers.length !== 0 && (
         <Grid
           container
-          spacing={3}
+          spacing={2}
           sx={{ paddingLeft: "20px", width: "100%", border: "1px solid red" }}
         >
           {workers.map((worker) => {

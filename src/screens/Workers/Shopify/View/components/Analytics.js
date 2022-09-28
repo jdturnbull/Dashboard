@@ -1,16 +1,16 @@
-import React from 'react';
-import { Box, Grid } from '@mui/material';
-import PerfectScrollbar from 'react-perfect-scrollbar';
-import SentimentAnalysis from './SentimentAnalysis';
-import ActionAnalysis from './ActionAnalysis';
-import UsageAnalysis from './UsageAnalysis';
-import PaymentAnalysis from './PaymentAnalysis';
+import React from "react";
+import { Box, Grid } from "@mui/material";
+import PerfectScrollbar from "react-perfect-scrollbar";
+import SentimentAnalysis from "./SentimentAnalysis";
+import ActionAnalysis from "./ActionAnalysis";
+import UsageAnalysis from "./UsageAnalysis";
+import PaymentAnalysis from "./PaymentAnalysis";
 
 const Analytics = ({ conversations, actions }) => {
   return (
     <PerfectScrollbar>
       <Box>
-        <Grid container spacing={3} rowSpacing={5}>
+        <Grid container spacing={2} rowSpacing={5}>
           <Grid item lg={4} md={12} xl={12} xs={12}>
             <SentimentAnalysis conversations={conversations} />
           </Grid>

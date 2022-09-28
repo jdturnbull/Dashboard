@@ -19,7 +19,7 @@ const DashboardWorkerList = (props) => {
     };
 
     return (
-      <Grid container spacing={3}>
+      <Grid container spacing={2}>
         {workers.map((worker) => {
           return (
             <Grid key={worker.id} item lg={4} md={12} xl={12} xs={12}>
