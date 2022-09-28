@@ -23,8 +23,13 @@ export const user = createSlice({
     session: null,
     errored: false,
     workers: [],
+    sideBarOpen: false,
   },
-
+  reducers: {
+    setSideBarOpen: (state, action) => {
+      state.sideBarOpen = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(setup.fulfilled, (state, action) => {
       const { session, workers, actions } = action.payload;
@@ -45,4 +50,5 @@ export const user = createSlice({
   },
 });
 
+export const { setSideBarOpen } = user.actions;
 export default user.reducer;

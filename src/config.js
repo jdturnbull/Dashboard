@@ -17,7 +17,7 @@ module.exports = {
   },
   app_base:
     process.env.NODE_ENV === "production"
-      ? "https://sprightly-pithivier-b6b45f.netlify.app"
+      ? "https://app.communion.so"
       : "http://localhost:3000",
   api_base:
     process.env.NODE_ENV === "production"

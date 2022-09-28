@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Card,
   Box,
@@ -12,12 +12,12 @@ import {
   Button,
   Typography,
   CardHeader,
-} from '@mui/material';
-import PerfectScrollbar from 'react-perfect-scrollbar';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
-import { SketchPicker } from 'react-color';
-import { update } from '../../../../stores/shopify';
+} from "@mui/material";
+import PerfectScrollbar from "react-perfect-scrollbar";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { SketchPicker } from "react-color";
+import { update } from "../../../../stores/shopify";
 
 const Edit = () => {
   const { id } = useParams();
@@ -29,19 +29,38 @@ const Edit = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [firstMessage, setFirstMessage] = useState(worker.configuration.firstMessage);
-  const [headingText, setHeadingText] = useState(worker.configuration.headingText);
+  const [firstMessage, setFirstMessage] = useState(
+    worker.configuration.firstMessage
+  );
+  const [headingText, setHeadingText] = useState(
+    worker.configuration.headingText
+  );
   const [subHeader, setSubHeader] = useState(worker.configuration.subHeader);
-  const [primaryColor, setPrimaryColor] = useState(worker.configuration.primaryColor);
-  const [visitorTextColor, setVisitorTextColor] = useState(worker.configuration.visitorTextColor);
-  const [botTextColor, setBotTextColor] = useState(worker.configuration.botTextColor);
+  const [primaryColor, setPrimaryColor] = useState(
+    worker.configuration.primaryColor
+  );
+  const [visitorTextColor, setVisitorTextColor] = useState(
+    worker.configuration.visitorTextColor
+  );
+  const [botTextColor, setBotTextColor] = useState(
+    worker.configuration.botTextColor
+  );
 
   const handleSave = () => {
     dispatch(
       update({
         id,
-        data: { firstMessage, headingText, subHeader, primaryColor, visitorTextColor, botTextColor },
-      }),
+        data: {
+          configuration: {
+            firstMessage,
+            headingText,
+            subHeader,
+            primaryColor,
+            visitorTextColor,
+            botTextColor,
+          },
+        },
+      })
     );
     setTimeout(() => setSaved(true), 1000);
   };
@@ -53,13 +72,21 @@ const Edit = () => {
   return (
     <Card>
       <CardHeader
-        title={'Shopify Chatbot'}
+        title={"Shopify Chatbot"}
         action={
           <>
-            <Button variant="outlined" sx={{ marginRight: '10px', color: 'primary.main' }} onClick={handleBack}>
+            <Button
+              variant="outlined"
+              sx={{ marginRight: "10px", color: "primary.main" }}
+              onClick={handleBack}
+            >
               Back
             </Button>
-            <Button variant="contained" sx={{ backgroundColor: 'primary.main' }} onClick={handleSave}>
+            <Button
+              variant="contained"
+              sx={{ backgroundColor: "primary.main" }}
+              onClick={handleSave}
+            >
               Save
             </Button>
           </>
@@ -69,10 +96,15 @@ const Edit = () => {
         <Alert
           severity="success"
           action={
-            <Button color="inherit" size="small" onClick={() => setSaved(false)}>
+            <Button
+              color="inherit"
+              size="small"
+              onClick={() => setSaved(false)}
+            >
               Clear
             </Button>
-          }>
+          }
+        >
           Sucessfully saved configuration
         </Alert>
       )}
@@ -90,9 +122,10 @@ const Edit = () => {
                 <TableCell>
                   <Box
                     sx={{
-                      alignItems: 'center',
-                      display: 'flex',
-                    }}>
+                      alignItems: "center",
+                      display: "flex",
+                    }}
+                  >
                     <Typography color="textPrimary" variant="body1">
                       First Message
                     </Typography>
@@ -100,7 +133,7 @@ const Edit = () => {
                 </TableCell>
                 <TableCell>
                   <TextField
-                    sx={{ width: '100%' }}
+                    sx={{ width: "100%" }}
                     variant="outlined"
                     value={firstMessage}
                     onChange={(e) => setFirstMessage(e.target.value)}
@@ -111,9 +144,10 @@ const Edit = () => {
                 <TableCell>
                   <Box
                     sx={{
-                      alignItems: 'center',
-                      display: 'flex',
-                    }}>
+                      alignItems: "center",
+                      display: "flex",
+                    }}
+                  >
                     <Typography color="textPrimary" variant="body1">
                       Header text
                     </Typography>
@@ -121,7 +155,7 @@ const Edit = () => {
                 </TableCell>
                 <TableCell>
                   <TextField
-                    sx={{ width: '100%' }}
+                    sx={{ width: "100%" }}
                     variant="outlined"
                     value={headingText}
                     onChange={(e) => setHeadingText(e.target.value)}
@@ -132,9 +166,10 @@ const Edit = () => {
                 <TableCell>
                   <Box
                     sx={{
-                      alignItems: 'center',
-                      display: 'flex',
-                    }}>
+                      alignItems: "center",
+                      display: "flex",
+                    }}
+                  >
                     <Typography color="textPrimary" variant="body1">
                       SubHeader text
                     </Typography>
@@ -142,7 +177,7 @@ const Edit = () => {
                 </TableCell>
                 <TableCell>
                   <TextField
-                    sx={{ width: '100%' }}
+                    sx={{ width: "100%" }}
                     variant="outlined"
                     value={subHeader}
                     onChange={(e) => setSubHeader(e.target.value)}
@@ -151,7 +186,7 @@ const Edit = () => {
               </TableRow>
             </TableBody>
           </Table>
-          <Box sx={{ marginTop: '20px' }}>
+          <Box sx={{ marginTop: "20px" }}>
             <Table>
               <TableHead>
                 <TableRow>
@@ -163,16 +198,24 @@ const Edit = () => {
               <TableBody>
                 <TableRow hover>
                   <TableCell>
-                    <SketchPicker color={primaryColor} onChangeComplete={(color) => setPrimaryColor(color.hex)} />
+                    <SketchPicker
+                      color={primaryColor}
+                      onChangeComplete={(color) => setPrimaryColor(color.hex)}
+                    />
                   </TableCell>
                   <TableCell>
                     <SketchPicker
                       color={visitorTextColor}
-                      onChangeComplete={(color) => setVisitorTextColor(color.hex)}
+                      onChangeComplete={(color) =>
+                        setVisitorTextColor(color.hex)
+                      }
                     />
                   </TableCell>
                   <TableCell>
-                    <SketchPicker color={botTextColor} onChangeComplete={(color) => setBotTextColor(color.hex)} />
+                    <SketchPicker
+                      color={botTextColor}
+                      onChangeComplete={(color) => setBotTextColor(color.hex)}
+                    />
                   </TableCell>
                 </TableRow>
               </TableBody>

@@ -1,21 +1,34 @@
-import { Box, Button, Divider, Drawer, Typography, useMediaQuery } from '@mui/material';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import { ChartBar as ChartBarIcon } from '../../../icons/chart-bar';
-import { Selector as SelectorIcon } from '../../../icons/selector';
-import { User as UserIcon } from '../../../icons/user';
-import NavItem from './NavItem';
-import { useSelector } from 'react-redux';
+import {
+  Box,
+  Button,
+  Divider,
+  Drawer,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import { ChartBar as ChartBarIcon } from "../../../icons/chart-bar";
+import { Selector as SelectorIcon } from "../../../icons/selector";
+import EngineeringIcon from "@mui/icons-material/Engineering";
+import { User as UserIcon } from "../../../icons/user";
+import NavItem from "./NavItem";
+import { useSelector } from "react-redux";
 
 const items = [
   {
-    href: '/',
+    href: "/",
     icon: <ChartBarIcon fontSize="small" />,
-    title: 'Dashboard',
+    title: "Dashboard",
   },
   {
-    href: '/account',
+    href: "/workers",
+    icon: <EngineeringIcon fontSize="small" />,
+    title: "Workers",
+  },
+  {
+    href: "/account",
     icon: <UserIcon fontSize="small" />,
-    title: 'Account',
+    title: "Account",
   },
 ];
 
@@ -23,33 +36,39 @@ const SideBar = (props) => {
   const { open, onClose } = props;
   const session = useSelector((state) => state.user.session);
 
-  const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'), {
+  const lgUp = useMediaQuery((theme) => theme.breakpoints.up("lg"), {
     defaultMatches: true,
     noSsr: false,
   });
+
+  const handlePlaygroundClick = () => {
+    window.open("https://communion-developer.myshopify.com");
+  };
 
   const content = (
     <>
       <Box
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          height: '100%',
-        }}>
+          display: "flex",
+          flexDirection: "column",
+          height: "100%",
+        }}
+      >
         <div>
           <Box sx={{ p: 3 }}></Box>
           <Box sx={{ px: 2 }}>
             <Box
               sx={{
-                alignItems: 'center',
-                backgroundColor: 'rgba(255, 255, 255, 0.04)',
-                cursor: 'pointer',
-                display: 'flex',
-                justifyContent: 'space-between',
+                alignItems: "center",
+                backgroundColor: "rgba(255, 255, 255, 0.04)",
+                cursor: "pointer",
+                display: "flex",
+                justifyContent: "space-between",
                 px: 3,
-                py: '11px',
+                py: "11px",
                 borderRadius: 1,
-              }}>
+              }}
+            >
               <div>
                 <Typography color="inherit" variant="subtitle1">
                   {`${session.organisation}`}
@@ -60,7 +79,7 @@ const SideBar = (props) => {
               </div>
               <SelectorIcon
                 sx={{
-                  color: 'neutral.500',
+                  color: "neutral.500",
                   width: 14,
                   height: 14,
                 }}
@@ -70,21 +89,27 @@ const SideBar = (props) => {
         </div>
         <Divider
           sx={{
-            borderColor: '#2D3748',
+            borderColor: "#2D3748",
             my: 3,
           }}
         />
         <Box sx={{ flexGrow: 1 }}>
           {items.map((item) => (
-            <NavItem key={item.title} icon={item.icon} href={item.href} title={item.title} />
+            <NavItem
+              key={item.title}
+              icon={item.icon}
+              href={item.href}
+              title={item.title}
+            />
           ))}
         </Box>
-        <Divider sx={{ borderColor: '#2D3748' }} />
+        <Divider sx={{ borderColor: "#2D3748" }} />
         <Box
           sx={{
             px: 2,
             py: 3,
-          }}>
+          }}
+        >
           <Typography color="neutral.100" variant="subtitle2">
             Check out the Playground!
           </Typography>
@@ -97,7 +122,9 @@ const SideBar = (props) => {
             endIcon={<OpenInNewIcon />}
             fullWidth
             sx={{ mt: 2 }}
-            variant="contained">
+            onClick={handlePlaygroundClick}
+            variant="contained"
+          >
             Check out Playground
           </Button>
         </Box>
@@ -112,12 +139,13 @@ const SideBar = (props) => {
         open
         PaperProps={{
           sx: {
-            backgroundColor: 'neutral.900',
-            color: '#FFFFFF',
+            backgroundColor: "neutral.900",
+            color: "#FFFFFF",
             width: 280,
           },
         }}
-        variant="permanent">
+        variant="permanent"
+      >
         {content}
       </Drawer>
     );
@@ -130,13 +158,14 @@ const SideBar = (props) => {
       open={open}
       PaperProps={{
         sx: {
-          backgroundColor: 'neutral.900',
-          color: '#FFFFFF',
+          backgroundColor: "neutral.900",
+          color: "#FFFFFF",
           width: 280,
         },
       }}
       sx={{ zIndex: (theme) => theme.zIndex.appBar + 100 }}
-      variant="temporary">
+      variant="temporary"
+    >
       {content}
     </Drawer>
   );

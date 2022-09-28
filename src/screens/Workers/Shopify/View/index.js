@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, CardHeader, Box, Tabs, Tab, Button, Alert } from "@mui/material";
+import { Box, Button, Alert, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import Analytics from "./components/Analytics";
 import Conversations from "./components/Conversations";
@@ -8,7 +8,8 @@ import Configuration from "./components/Configuration";
 import { useDispatch, useSelector } from "react-redux";
 import { getConversation } from "../../../../functions";
 import { setup } from "../../../../stores/user";
-import config from "../../../../config";
+import { update } from "../../../../stores/shopify";
+import NavBar from "../../../../components/NavBar";
 
 const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
@@ -31,9 +32,6 @@ const View = () => {
   const [tabValue, setTabValue] = useState(0);
   const [conversations, setConversations] = useState([]);
   const [shouldRefresh, setShouldRefresh] = useState(false);
-  const handleTabChange = (e, v) => {
-    setTabValue(v);
-  };
 
   const dispatch = useDispatch();
 
@@ -53,6 +51,8 @@ const View = () => {
         `https://${worker.storeName}.myshopify.com/admin/themes/current/editor?context=apps`
       )
       .focus();
+    dispatch(update({ id: worker.id, data: { addedToTheme: true } }));
+    refresh();
   };
 
   useEffect(() => {
@@ -66,28 +66,73 @@ const View = () => {
     get();
   }, [id, shouldRefresh, dispatch]);
 
+  const TabOption = ({ selected, option, onClick, val }) => {
+    const handleClick = () => onClick(val);
+
+    return (
+      <Box onClick={handleClick} sx={{ cursor: "default", padding: "0 15px" }}>
+        <Typography
+          sx={selected ? { color: "#5048E5" } : { color: "#000" }}
+          style={{ fontWeight: 500 }}
+        >
+          {option}
+        </Typography>
+      </Box>
+    );
+  };
+
+  const Tabs = () => {
+    const handleClick = (v) => {
+      setTabValue(v);
+    };
+
+    return (
+      <Box sx={{ display: "flex", flex: 1, justifyContent: "space-evenly" }}>
+        <TabOption
+          selected={tabValue === 0}
+          option={"Analytics"}
+          val={0}
+          onClick={handleClick}
+        />
+        <TabOption
+          selected={tabValue === 1}
+          option={"Actions"}
+          val={1}
+          onClick={handleClick}
+        />
+        <TabOption
+          selected={tabValue === 2}
+          option={"Conversations"}
+          val={2}
+          onClick={handleClick}
+        />
+        <TabOption
+          selected={tabValue === 3}
+          option={"Configuration"}
+          val={3}
+          onClick={handleClick}
+        />
+      </Box>
+    );
+  };
+
   return (
     <Box component="main">
-      <Card>
-        <CardHeader
-          title={"Shopify Chatbot"}
-          action={
-            <Tabs value={tabValue} onChange={handleTabChange}>
-              <Tab label="Analytics" />
-              <Tab label="Actions" />
-              <Tab label="Conversations" />
-              <Tab label="Configuration" />
-            </Tabs>
-          }
-        />
-      </Card>
-      {/* <Alert severity="warning" sx={{ display: "flex", alignItems: "center" }}>
-        You haven't activated the agent yet - when you've finished configuration
-        please
-        <Button sx={{ marginBottom: "3px" }} onClick={handleDeepLinkPress}>
-          Activate
-        </Button>
-      </Alert> */}
+      <NavBar header={"Your Shopify Chatbot"} Right={Tabs} />
+
+      {!worker.addedToTheme && (
+        <Alert
+          severity="warning"
+          sx={{ display: "flex", alignItems: "center", mt: 2 }}
+        >
+          You haven't activated the agent yet - when you've finished
+          configuration please
+          <Button sx={{ marginBottom: "3px" }} onClick={handleDeepLinkPress}>
+            Activate
+          </Button>
+        </Alert>
+      )}
+
       <TabPanel value={tabValue} index={0}>
         <Analytics
           conversations={conversations}

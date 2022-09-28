@@ -1,30 +1,32 @@
-import React from 'react';
-import { Avatar, Button, Grid, Typography } from '@mui/material';
-import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
-import ControlPointOutlinedIcon from '@mui/icons-material/ControlPointOutlined';
+import React from "react";
+import { Avatar, Button, Grid, Typography } from "@mui/material";
+import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
+import ControlPointOutlinedIcon from "@mui/icons-material/ControlPointOutlined";
 
-const WorkerListAddNewWorker = ({ handleClick }) => {
+const EmptyWorkersList = ({ handleClick }) => {
   return (
     <Grid
       container
-      direction={'column'}
-      spacing={2}
+      direction={"column"}
+      spacing={3}
       sx={{
-        width: '80vw',
-        alignItems: 'center',
-        marginTop: '50px',
-      }}>
+        width: "80vw",
+        alignItems: "center",
+        marginTop: "50px",
+      }}
+    >
       <Grid item>
         <Avatar
           sx={{
-            backgroundColor: 'error.main',
+            backgroundColor: "error.main",
             height: 66,
             width: 66,
-          }}>
+          }}
+        >
           <HourglassEmptyIcon fontSize="large" />
         </Avatar>
       </Grid>
-      <Grid item sx={{ textAlign: 'center' }}>
+      <Grid item sx={{ textAlign: "center" }}>
         <Typography color="textPrimary" gutterBottom variant="body1">
           You haven't created any agents!
         </Typography>
@@ -38,7 +40,8 @@ const WorkerListAddNewWorker = ({ handleClick }) => {
           variant="contained"
           color="primary"
           size="medium"
-          startIcon={<ControlPointOutlinedIcon />}>
+          startIcon={<ControlPointOutlinedIcon />}
+        >
           New Agent
         </Button>
       </Grid>
@@ -46,4 +49,4 @@ const WorkerListAddNewWorker = ({ handleClick }) => {
   );
 };
 
-export default WorkerListAddNewWorker;
+export default EmptyWorkersList;

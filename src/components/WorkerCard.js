@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { Avatar, Card, CardContent, Grid, Typography } from '@mui/material';
-import { withStyles } from '@mui/styles';
-import useWindowDimensions from '../hooks/useWindowDimensions';
-import EngineeringIcon from '@mui/icons-material/Engineering';
-import { DeleteForever } from '@mui/icons-material';
+import React, { useEffect, useState } from "react";
+import { Avatar, Card, CardContent, Grid, Typography } from "@mui/material";
+import { withStyles } from "@mui/styles";
+import useWindowDimensions from "../hooks/useWindowDimensions";
+import EngineeringIcon from "@mui/icons-material/Engineering";
 
 const styles = (theme) => {
   return {
     card: {
-      height: '100%',
-      backgroundColor: '#00000008',
-      border: '1px solid #00000010',
-      '&:hover': {
+      height: "100%",
+      backgroundColor: "#00000008",
+      border: "1px solid #00000010",
+      "&:hover": {
         border: `1px solid ${theme.palette.primary.main}`,
-        cursor: 'pointer',
+        cursor: "pointer",
       },
     },
   };
@@ -40,7 +39,7 @@ const WorkerCard = (props) => {
   return (
     <Card className={props.classes.card} onClick={handleClick}>
       <CardContent>
-        <Grid container spacing={3} sx={{ justifyContent: 'space-between' }}>
+        <Grid container spacing={3} sx={{ justifyContent: "space-between" }}>
           <Grid item>
             <Typography color="textSecondary" gutterBottom variant="overline">
               Agent
@@ -56,10 +55,11 @@ const WorkerCard = (props) => {
             <Grid item>
               <Avatar
                 sx={{
-                  backgroundColor: 'primary.main',
+                  backgroundColor: "primary.main",
                   height: 46,
                   width: 46,
-                }}>
+                }}
+              >
                 <EngineeringIcon />
               </Avatar>
             </Grid>

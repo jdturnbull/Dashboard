@@ -8,7 +8,9 @@ import SignIn from "./screens/SignIn";
 import SignUp from "./screens/SignUp";
 import Pending from "./screens/Pending";
 import Dashboard from "./screens/Dashboard";
+import WorkersCreate from "./screens/Workers/Create";
 import WorkersOutlet from "./screens/Workers/Outlet";
+import WorkersView from "./screens/Workers/View";
 import ShopifyOutlet from "./screens/Workers/Shopify/Outlet";
 import ShopifyCreate from "./screens/Workers/Shopify/Create";
 import ShopifyCreateSuccess from "./screens/Workers/Shopify/Success";
@@ -34,6 +36,8 @@ const AuthedApp = () => {
         <Route path="/" element={<Dashboard />} />
         <Route path="/signup" element={<Navigate to="/" replace />} />
         <Route path="/workers" element={<WorkersOutlet />}>
+          <Route path="view:id" element={<WorkersView />} />
+          <Route path="create" element={<WorkersCreate />} />
           <Route path="shopify" element={<ShopifyOutlet />}>
             <Route path="create" element={<ShopifyCreate />} />
             <Route path="success" element={<ShopifyCreateSuccess />} />

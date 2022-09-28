@@ -1,103 +1,94 @@
-import React, { useState } from 'react';
-import { Card, CardHeader, Divider, CardContent, Container, Grid, TextField, Button } from '@mui/material';
-import { QuestionAnswer } from '@mui/icons-material';
-import { useDispatch, useSelector } from 'react-redux';
-import WorkerCard from '../../../../components/WorkerCard';
-import { integrate } from '../../../../stores/shopify';
+import React, { useState } from "react";
+import { Box, Grid, TextField, Button } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { integrate } from "../../../../stores/shopify";
+import NavBar from "../../../../components/NavBar";
 
-const chatbot = {
-  id: 'CHATBOT',
-  name: 'Shopify Chatbot',
-  icon: QuestionAnswer,
-  description: 'An AI chatbot to handle product QA and customer support!',
+const Stage0 = ({ description, setDescription, handleNext }) => {
+  return (
+    <Grid sx={{ display: "flex", flexDirection: "column", width: "70%" }} item>
+      <TextField
+        sx={{ marginBottom: "10px" }}
+        label="Describe your company, the more detail the better"
+        multiline={true}
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <Button
+          onClick={handleNext}
+          variant="contained"
+          sx={{ color: "main.primary" }}
+        >
+          Next
+        </Button>
+      </div>
+    </Grid>
+  );
 };
 
-const Shopify = ({ onClick }) => {
-  const [stage, setStage] = useState(0);
-  const [storeName, setStoreName] = useState('');
-  const [description, setDescription] = useState('');
-
-  const handleNext = () => setStage(stage + 1);
-
-  const handleClick = () => onClick({ id: 'CHATBOT', value: storeName, description });
-
-  if (stage === 0) {
-    return (
-      <Grid sx={{ display: 'flex', flexDirection: 'column', width: '70%' }} item>
-        <TextField
-          sx={{ marginBottom: '10px' }}
-          label="Describe your company, the more detail the better"
-          multiline={true}
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <Button onClick={handleNext} variant="contained" sx={{ color: 'main.primary' }}>
-            Next
-          </Button>
-        </div>
-      </Grid>
-    );
-  }
-
-  if (stage === 1) {
-    return (
-      <Grid sx={{ display: 'flex', flexDirection: 'column', width: '70%' }} item>
-        <TextField
-          sx={{ marginBottom: '10px' }}
-          label="Shopify store name"
-          value={storeName}
-          onChange={(e) => setStoreName(e.target.value)}
-        />
-        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <Button onClick={handleClick} variant="contained" sx={{ color: 'main.primary' }}>
-            Integrate
-          </Button>
-        </div>
-      </Grid>
-    );
-  }
+const Stage1 = ({ storeName, setStoreName, handleClick }) => {
+  return (
+    <Grid sx={{ display: "flex", flexDirection: "column", width: "70%" }} item>
+      <TextField
+        sx={{ marginBottom: "10px" }}
+        label="Shopify store name"
+        value={storeName}
+        onChange={(e) => setStoreName(e.target.value)}
+      />
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <Button
+          onClick={handleClick}
+          variant="contained"
+          sx={{ color: "main.primary" }}
+        >
+          Integrate
+        </Button>
+      </div>
+    </Grid>
+  );
 };
 
 const Create = () => {
   const dispatch = useDispatch();
   const session = useSelector((state) => state.user.session);
-  const workerTypes = useSelector((state) => state.user.workers.map((w) => w.id));
 
-  const [selected, setSelected] = useState();
+  const [stage, setStage] = useState(0);
+  const [storeName, setStoreName] = useState("");
+  const [description, setDescription] = useState("");
 
-  const handleClick = (id) => {
-    setSelected(id);
-  };
+  const handleNext = () => setStage(stage + 1);
 
   const handleSelectedClick = async (props) => {
-    if (props.id === 'CHATBOT') {
-      dispatch(integrate({ email: session.email, shop: props.value, description: props.description }));
-    }
+    dispatch(
+      integrate({
+        email: session.email,
+        shop: storeName,
+        description,
+      })
+    );
   };
 
   return (
-    <Card sx={{ height: 400 }}>
-      <CardHeader title="Create a new agent" />
-      <Divider />
-      <CardContent>
-        <Container maxWidth={false}>
-          {selected ? (
-            <Grid container spacing={3}>
-              {selected === 'CHATBOT' && <Shopify onClick={handleSelectedClick} />}
-            </Grid>
-          ) : (
-            <Grid container spacing={3}>
-              {!workerTypes.includes('CHATBOT') && (
-                <Grid item>
-                  <WorkerCard worker={chatbot} onClick={handleClick} />
-                </Grid>
-              )}
-            </Grid>
-          )}
-        </Container>
-      </CardContent>
-    </Card>
+    <Box component="main" sx={{ width: "100%", height: "93vh" }}>
+      <NavBar header={"Create Your Shopify Chatbot"} />
+      <Box sx={{ mt: 5, padding: "0 15px" }}>
+        {stage === 0 && (
+          <Stage0
+            description={description}
+            setDescription={setDescription}
+            handleNext={handleNext}
+          />
+        )}
+        {stage === 1 && (
+          <Stage1
+            storeName={storeName}
+            setStoreName={setStoreName}
+            handleClick={handleSelectedClick}
+          />
+        )}
+      </Box>
+    </Box>
   );
 };
 
