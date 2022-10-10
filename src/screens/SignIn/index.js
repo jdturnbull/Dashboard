@@ -77,7 +77,7 @@ const SignIn = () => {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ mt: 3, mb: 2, "&:hover": { backgroundColor: "#D19830" } }}
           >
             Sign In
           </Button>
@@ -88,7 +88,7 @@ const SignIn = () => {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="signup" variant="body2">
+              <Link href="/" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

@@ -23,8 +23,8 @@ const UnauthedApp = () => {
   return (
     <UnauthedLayout>
       <Routes>
-        <Route path="/" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/" element={<SignUp />} />
+        <Route path="/signin" element={<SignIn />} />
         <Route path="/pending" element={<Pending />} />
       </Routes>
     </UnauthedLayout>
