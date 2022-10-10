@@ -21,7 +21,7 @@ export const user = createSlice({
   name: "user",
   initialState: {
     session: null,
-    errored: false,
+    error: false,
     workers: [],
     sideBarOpen: false,
   },
@@ -39,13 +39,17 @@ export const user = createSlice({
     });
     // TODO: Catch auth.error
     builder.addCase(auth.fulfilled, (state, action) => {
-      const { email, firstName } = action.payload;
+      const { email, firstName, error } = action.payload;
 
-      const redirect = new URL(`${app_base}/pending`);
-      redirect.searchParams.append("email", email);
-      redirect.searchParams.append("firstName", firstName);
+      if (error) {
+        state.error = true;
+      } else {
+        const redirect = new URL(`${app_base}/pending`);
+        redirect.searchParams.append("email", email);
+        redirect.searchParams.append("firstName", firstName);
 
-      window.open(redirect, "_self");
+        window.open(redirect, "_self");
+      }
     });
   },
 });

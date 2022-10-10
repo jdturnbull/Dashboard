@@ -17,7 +17,10 @@ const Dashboard = () => {
       <Button
         startIcon={<AddCircleOutlineIcon />}
         variant="contained"
-        color="primary"
+        sx={{
+          background:
+            "linear-gradient(99.1deg, #D19931 -4.02%, #E2BA40 97.91%)",
+        }}
         onClick={handleNewAgentClick}
       >
         New Agent

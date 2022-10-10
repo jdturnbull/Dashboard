@@ -117,11 +117,15 @@ const SideBar = (props) => {
             Give our agents a try
           </Typography>
           <Button
-            color="secondary"
+            color="primary"
             component="a"
             endIcon={<OpenInNewIcon />}
             fullWidth
-            sx={{ mt: 2 }}
+            sx={{
+              mt: 2,
+              background:
+                "linear-gradient(99.1deg, #D19931 -4.02%, #E2BA40 97.91%)",
+            }}
             onClick={handlePlaygroundClick}
             variant="contained"
           >
