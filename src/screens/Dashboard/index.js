@@ -18,8 +18,7 @@ const Dashboard = () => {
         startIcon={<AddCircleOutlineIcon />}
         variant="contained"
         sx={{
-          background:
-            "linear-gradient(99.1deg, #D19931 -4.02%, #E2BA40 97.91%)",
+          "&:hover": { backgroundColor: "primary.hover" },
         }}
         onClick={handleNewAgentClick}
       >

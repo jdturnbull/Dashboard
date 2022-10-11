@@ -18,7 +18,7 @@ const EmptyWorkersList = ({ handleClick }) => {
       <Grid item>
         <Avatar
           sx={{
-            backgroundColor: "error.main",
+            backgroundColor: "secondary.main",
             height: 66,
             width: 66,
           }}
@@ -40,6 +40,7 @@ const EmptyWorkersList = ({ handleClick }) => {
           variant="contained"
           color="primary"
           size="medium"
+          sx={{ "&:hover": { backgroundColor: "primary.hover" } }}
           startIcon={<ControlPointOutlinedIcon />}
         >
           New Agent

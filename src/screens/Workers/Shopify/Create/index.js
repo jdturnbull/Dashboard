@@ -18,7 +18,10 @@ const Stage0 = ({ description, setDescription, handleNext }) => {
         <Button
           onClick={handleNext}
           variant="contained"
-          sx={{ color: "main.primary" }}
+          sx={{
+            color: "main.primary",
+            "&:hover": { backgroundColor: "primary.hover" },
+          }}
         >
           Next
         </Button>
@@ -40,7 +43,10 @@ const Stage1 = ({ storeName, setStoreName, handleClick }) => {
         <Button
           onClick={handleClick}
           variant="contained"
-          sx={{ color: "main.primary" }}
+          sx={{
+            color: "main.primary",
+            "&:hover": { backgroundColor: "primary.hover" },
+          }}
         >
           Integrate
         </Button>

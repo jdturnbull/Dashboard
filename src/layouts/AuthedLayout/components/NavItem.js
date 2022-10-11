@@ -32,11 +32,9 @@ const NavItem = (props) => {
         startIcon={icon}
         disableRipple
         sx={{
-          background:
-            active &&
-            "linear-gradient(99.1deg, #D19931 -4.02%, #E2BA40 97.91%)",
+          backgroundColor: active && "rgba(255, 255, 255, 0.04)",
           borderRadius: 1,
-          color: active ? "#000" : "neutral.300",
+          color: active ? "neutral.100" : "neutral.300",
           fontWeight: active && "fontWeightBold",
           justifyContent: "flex-start",
           px: 3,

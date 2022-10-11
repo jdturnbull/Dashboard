@@ -77,7 +77,11 @@ const SignIn = () => {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2, "&:hover": { backgroundColor: "#D19830" } }}
+            sx={{
+              mt: 3,
+              mb: 2,
+              "&:hover": { backgroundColor: "primary.hover" },
+            }}
           >
             Sign In
           </Button>

@@ -103,35 +103,6 @@ const SideBar = (props) => {
             />
           ))}
         </Box>
-        <Divider sx={{ borderColor: "#2D3748" }} />
-        <Box
-          sx={{
-            px: 2,
-            py: 3,
-          }}
-        >
-          <Typography color="neutral.100" variant="subtitle2">
-            Check out the Playground!
-          </Typography>
-          <Typography color="neutral.500" variant="body2">
-            Give our agents a try
-          </Typography>
-          <Button
-            color="primary"
-            component="a"
-            endIcon={<OpenInNewIcon />}
-            fullWidth
-            sx={{
-              mt: 2,
-              background:
-                "linear-gradient(99.1deg, #D19931 -4.02%, #E2BA40 97.91%)",
-            }}
-            onClick={handlePlaygroundClick}
-            variant="contained"
-          >
-            Check out Playground
-          </Button>
-        </Box>
       </Box>
     </>
   );
